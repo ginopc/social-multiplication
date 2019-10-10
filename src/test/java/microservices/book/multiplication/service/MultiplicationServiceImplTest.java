@@ -21,20 +21,22 @@ public class MultiplicationServiceImplTest {
 	private RandomGeneratorService randomGeneratorService;
 	
 	@Before
-	private void setUp() {
+	public void setUp() {
 		// With this call to initMocks we tell Mockito to process the annotations
 		MockitoAnnotations.initMocks(this);
 		multiplicationServiceImpl = new MultiplicationServiceImpl(randomGeneratorService);
 		
 	}
 	
-	@Autowired
-	private MultiplicationService multiplicationService;
-
 	@Test
 	public void createRandomMultiplicationTest() {
-		Multiplication multiplication = multiplicationService.createRandomMultiplication();
+		// given (our mocked Random Generator service will return first 50, then 30)
+		org.mockito.BDDMockito.given(randomGeneratorService.generateRandomFactor()).willReturn(50,  30);
 		
+		// when
+		Multiplication multiplication = multiplicationServiceImpl.createRandomMultiplication();
+		
+		// assert
 		assertEquals(50, multiplication.getFactorA());
 		assertEquals(30, multiplication.getFactorB());
 		assertEquals(1500, multiplication.getResult());
@@ -42,8 +44,6 @@ public class MultiplicationServiceImplTest {
 	
 	@Test
 	public void checkCorrectAttemptTest() {
-		fail("Not yet implemented");
-		
 		// given 
 		Multiplication multiplication = new Multiplication(50, 60);
 		User user = new User("john_doe");
@@ -58,7 +58,16 @@ public class MultiplicationServiceImplTest {
 	
 	@Test
 	public void checkWrongAttemptTest() {
-		fail("Not yet implemented");
+		// given
+		Multiplication multiplication = new Multiplication(50, 60);
+		User user = new User("john_doe");
+		MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3010);
+		
+		// when
+		boolean attemptResult = multiplicationServiceImpl.checkAttempt(attempt);
+		
+		// assert
+		assertFalse(attemptResult);
 	}
 
 }
