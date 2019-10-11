@@ -22,6 +22,7 @@ public class Multiplication {
 		this.result = factorA * factorB;
 	}
 	
+	// getter methods
 	public int getFactorA() { return this.factorA; }
 	public int getFactorB() { return this.factorB; }
 	public int getResult()  { return this.result;  }
