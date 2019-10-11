@@ -9,14 +9,11 @@ public final class User {
 	
 	private final String alias;
 	
-	protected User() {
-		this.alias = null;
-	}
+	// constructors
+	protected User() { this.alias = null; }
+	public User(String alias) { this.alias = alias; }
 	
-	public User(String alias) {
-		this.alias = alias;
-	}
-	
+	// getter methods
 	public String getAlias() { return this.alias; }
 	
 	@Override
