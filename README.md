@@ -1,6 +1,7 @@
 # social-multiplication
 
-A microservice game
+A microservice game.
+You can test your math knowledge resolving random multiplications.
 
 ## Contacts
 
